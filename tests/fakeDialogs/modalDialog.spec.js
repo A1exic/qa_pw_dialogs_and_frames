@@ -5,12 +5,12 @@ test('Fake modal dialog can be opened and closed', async ({ page }) => {
     'https://testpages.eviltester.com/styled/alerts/fake-alert-test.html',
   );
 
-  await page.locator('#modaldialog').click();
+  await page.getByRole('button', { name: 'Show modal dialog' }).click();
 
-  const dialog = page.locator('#modaldialog-box');
+  const dialog = page.locator('[role="dialog"]');
   await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText('This is a modal dialog box');
+  await expect(dialog).toContainText('I am a modal div!');
 
-  await page.locator('#modal-ok').click();
+  await page.getByRole('button', { name: 'OK' }).click();
   await expect(dialog).toBeHidden();
 });

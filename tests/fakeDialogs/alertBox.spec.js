@@ -5,12 +5,12 @@ test('Fake alert box can be opened and closed', async ({ page }) => {
     'https://testpages.eviltester.com/styled/alerts/fake-alert-test.html',
   );
 
-  await page.locator('#fakealert').click();
+  await page.getByRole('button', { name: 'Show fake alert box' }).click();
 
-  const dialog = page.locator('#fakealert-box');
+  const dialog = page.locator('[role="dialog"]');
   await expect(dialog).toBeVisible();
-  await expect(dialog).toContainText('This is a Fake Alert');
+  await expect(dialog).toContainText('I am a fake alert box!');
 
-  await page.locator('#fakealert-ok').click();
+  await page.getByRole('button', { name: 'OK' }).click();
   await expect(dialog).toBeHidden();
 });
